@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HTML 태그 및 폼 설명</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            padding: 20px;
+        }
+        h1, h2 {
+            color: #333;
+        }
+        .tag-list {
+            margin-bottom: 20px;
+        }
+        .tag-list li {
+            margin: 5px 0;
+        }
+        .form-section {
+            margin-top: 30px;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        .form-section input {
+            display: block;
+            margin-bottom: 10px;
+            padding: 10px;
+            width: 100%;
+            max-width: 300px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        .form-section input[type="submit"] {
+            background-color: #007BFF;
+            color: white;
+            cursor: pointer;
+            border: none;
+        }
+        .form-section input[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <h1>HTML 태그 목록</h1>
+    <ul class="tag-list">
+        <li><strong>&lt;div&gt;</strong> - 블록 레벨 컨테이너 요소입니다.</li>
+        <li><strong>&lt;span&gt;</strong> - 인라인 컨테이너 요소입니다.</li>
+        <li><strong>&lt;a&gt;</strong> - 하이퍼링크 요소입니다.</li>
+        <li><strong>&lt;p&gt;</strong> - 단락 요소입니다.</li>
+        <li><strong>&lt;img&gt;</strong> - 이미지 요소입니다.</li>
+        <li><strong>&lt;ul&gt;</strong> - 순서 없는 목록 요소입니다.</li>
+        <li><strong>&lt;ol&gt;</strong> - 순서 있는 목록 요소입니다.</li>
+        <li><strong>&lt;li&gt;</strong> - 목록 항목 요소입니다.</li>
+    </ul>
+
+    <h2>폼 태그 설명</h2>
+    <div class="form-section">
+        <form action="#" method="post">
+            <label for="name">이름:</label>
+            <input type="text" id="name" name="name" placeholder="이름을 입력하세요" required>
+
+            <label for="email">이메일:</label>
+            <input type="email" id="email" name="email" placeholder="이메일을 입력하세요" required>
+
+            <label for="password">비밀번호:</label>
+            <input type="password" id="password" name="password" placeholder="비밀번호를 입력하세요" required>
+
+            <input type="submit" value="제출">
+        </form>
+    </div>
+</body>
+</html>

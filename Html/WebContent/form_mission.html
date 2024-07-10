@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+
+	<form action="서버 URL" method="get/post">
+		<fieldset>
+
+			<table border="1">
+				<tr>
+					<td>이름</td>
+					<td><input type="text" /></td>
+				</tr>
+				<tr>
+					<td>아이디</td>
+					<td><input type="text" />
+					<input type="submit" value="중복체크">
+					</td>
+				</tr>
+				<tr>
+					<td>비밀번호</td>
+					<td><input type="password"/></td>
+				</tr>
+				<tr>
+					<td>비밀번호 확인</td>
+					<td><input type="password"/></td>
+				</tr>
+				<tr>
+					<td>이메일</td>
+					<td><input type="email"/>@
+					<select>
+						<option value="==선택==" disabled="disabled" selected="selected">==선택==</option>
+						<option value="gmail">gmail.com</option>
+						<option value="naver">naver.com</option>
+					</select>
+					<input type="text"/>
+						
+					</td>
+				</tr>
+				<tr>
+					<td>연락처</td>
+					<td><input type="tel"/></td>
+				</tr>
+				<tr>
+					<td>메일수신여부</td>
+					<td>
+					<input type="radio" name="sendMail" value="yes"/>받음
+					<input type="radio" name="sendMail" value="no"/>받지 않음
+					</td>
+				</tr>
+				<tr>
+					<td>관심분야</td>
+					<td>
+						<input type="checkbox" name="category" value="java"/>자바
+						<input type="checkbox" name="category" value="c++"/>c++
+						<input type="checkbox" name="category" value="python"/>파이썬
+						<input type="checkbox" name="category" value="android"/>안드로이드
+					</td>
+				</tr>
+			</table>
+		</fieldset>
+		<fieldset>
+			<button>취소</button>
+			<input type="submit" value="저장">
+		</fieldset>
+	</form>
+
+</body>
+</html>
