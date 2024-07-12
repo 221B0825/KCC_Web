@@ -23,4 +23,15 @@ console.log("\n");
 
 // console.log(num);
 
-const num = 1;
+// const num = 1;
+
+var x = "global";
+
+function foo() {
+  var x = "local";
+  console.log(x);
+}
+
+foo();
+
+console.log(x);

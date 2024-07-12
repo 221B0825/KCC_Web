@@ -35,8 +35,11 @@ var greeting2 = (name) => {
   return `Hello ${name}`;
 };
 
+var greeting3 = (name) => `Hello ${name}`;
+
 console.log(greeting("홍길동"));
-console.log(greeting("김길동"));
+console.log(greeting2("김길동"));
+console.log(greeting3("박길동"));
 
 function multiply(x) {
   return function (y) {
