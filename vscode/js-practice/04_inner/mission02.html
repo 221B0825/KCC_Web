@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script type="text/javascript">
+      // 이미지를 랜덤하게 출력하는 예제
+      // 배열에 이미지 경로 추가 후 랜덤한 수를 입력 받아 해당 이미지를 출력
+      function display() {
+        var img = document.getElementById("img");
+        let randomNum = Math.floor(Math.random() * 3);
+        img.src = `../images/cat${randomNum}.jpg`;
+      }
+
+      // 페이지 로드 시 초기 이미지 설정
+      window.onload = function () {
+        display();
+      };
+    </script>
+  </head>
+  <body>
+    <img id="img" src="" />
+    <button onclick="display()">변경</button>
+  </body>
+</html>
