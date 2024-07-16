@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script type="text/javascript">
+      function checkId() {
+        // id에 입력된 값이 str에 없는 문자열을 사용했을 경우 경고창 출력
+        const str =
+          "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890";
+
+        const id = document.fmt.id.value; // id 값 접근
+
+        for (let i = 0; i < id.length; i++) {
+          if (!str.includes(id.charAt(i))) {
+            alert("사용 불가능한 아이디");
+            document.fmt.id.value = "";
+            break;
+          }
+        }
+      }
+
+      function checkId() {
+        // id에 입력된 값이 str에 없는 문자열을 사용했을 경우 경고창 출력
+        const str =
+          "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890";
+
+        const email = document.fmt.email.value; // id 값 접근
+        const result = email.indexOf("@"); // 없다면 -1 반환
+        for (let i = 0; i < email.length; i++) {
+          if (!email.includes("@")) {
+            alert("사용 불가능한 이메일");
+            document.fmt.email.value = "";
+            break;
+          }
+        }
+      }
+
+      function check() {
+        checkId();
+        checkEmail();
+      }
+    </script>
+  </head>
+  <body>
+    <form name="fmt">
+      아이디: <input type="text" name="id" /><br />
+      이메일: <input type="text" name="email" /><br />
+      <input type="button" value="전송" onclick="check()" />
+    </form>
+  </body>
+</html>

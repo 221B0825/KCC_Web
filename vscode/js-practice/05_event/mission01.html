@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script type="text/javascript">
+      //객체를 활용하여 계산기 프로그램을 구현하자.
+
+      const calculate = {
+        num1: 0,
+        num2: 0,
+        sum: 0,
+        cals: function (event) {
+          num1 = parseInt(document.getElementsByName("f1")[0].value);
+          num2 = parseInt(document.getElementsByName("f2")[0].value);
+
+          // 이벤트 대상이 현재 minus와 plus이다.
+          //const opt = this.value;
+
+          // this => 이벤트 대상 : this.value = "+" or "-"
+          if (event.target.value == "+") {
+            sum = num1 + num2;
+            document.fmt.result.value = sum;
+          } else if (event.target.value == "-") {
+            sum = num1 - num2;
+            document.fmt.result.value = sum;
+          }
+        },
+      };
+
+      window.onload = function () {
+        const minus = document.getElementById("minus");
+        const plus = document.getElementById("plus");
+
+        minus.addEventListener("click", calculate.cals, false);
+        plus.addEventListener("click", calculate.cals, false);
+      };
+    </script>
+  </head>
+  <body>
+    <h2>계산기</h2>
+    <table border="1">
+      <form name="fmt">
+        <tr>
+          <td>숫자1</td>
+          <td><input type="text" name="f1" /></td>
+        </tr>
+        <tr>
+          <td>숫자2</td>
+          <td><input type="text" name="f2" /></td>
+        </tr>
+        <tr>
+          <td colspan="2">
+            &nbsp;&nbsp;&nbsp;&nbsp;
+            <input type="button" value="+" id="plus" /> &nbsp;&nbsp;&nbsp;&nbsp;
+            <input type="button" value="-" id="minus" />
+          </td>
+        </tr>
+        <tr>
+          <td>결과</td>
+          <td><input type="text" name="result" /></td>
+        </tr>
+      </form>
+    </table>
+  </body>
+</html>

@@ -5,18 +5,31 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
     <script type="text/javascript">
-      // 이미지를 랜덤하게 출력하는 예제
-      // 배열에 이미지 경로 추가 후 랜덤한 수를 입력 받아 해당 이미지를 출력
-      function display() {
-        var img = document.getElementById("img");
-        let randomNum = Math.floor(Math.random() * 3);
-        img.src = `../images/cat${randomNum}.jpg`;
+      let arr = [];
+
+      for (let i = 0; i < 7; i++) {
+        arr[i] = "../images/pic" + (i + 1) + ".jpg";
       }
 
-      // 페이지 로드 시 초기 이미지 설정
       window.onload = function () {
-        display();
+        // 난수 발생
+        const n = Math.floor(Math.random() * 7); // 0-6
+        var img = document.getElementById("img");
+        img.src = arr[n];
       };
+
+      // 이미지를 랜덤하게 출력하는 예제
+      // 배열에 이미지 경로 추가 후 랜덤한 수를 입력 받아 해당 이미지를 출력
+      // function display() {
+      //   var img = document.getElementById("img");
+      //   let randomNum = Math.floor(Math.random() * 3);
+      //   img.src = `../images/cat${randomNum}.jpg`;
+      // }
+
+      // // 페이지 로드 시 초기 이미지 설정
+      // window.onload = function () {
+      //   display();
+      // };
     </script>
   </head>
   <body>
