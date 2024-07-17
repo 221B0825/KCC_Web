@@ -32,19 +32,3 @@ function sendRequest(url, params, callback, method) {
 	httpRequest.onreadystatechange = callback;
 	httpRequest.send(httpMethod == 'POST' ? httpParams : null);
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
