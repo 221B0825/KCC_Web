@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Document</title>
+    <meta charset="UTF-8" />
+  </head>
+
+  <body>
+    <label>출발역</label>
+    <select id="start"></select>
+    <label>도착역</label>
+    <select id="end"></select>
+    <label
+      ><input type="radio" name="group" value="ADULT" checked /> 성인일반</label
+    >
+    <label><input type="radio" name="group" value="YOUNG" /> 청소년</label>
+    <label><input type="radio" name="group" value="CHILD" /> 어린이</label>
+    <div>
+      <button onclick="calculate();">요금계산</button>
+    </div>
+    <div
+      id="output"
+      style="
+        width: 100%;
+        height: 150px;
+        overflow-y: auto;
+        border: 2px solid #222;
+      "
+    ></div>
+    <script>
+      const subwayList = [
+        "영등포구청역",
+        "당산역",
+        "합정역",
+        "홍대입구역",
+        "신촌역",
+        "이대역",
+        "아현역",
+        "충정로역",
+        "시청역",
+        "을지로3가역",
+        "을지로4가역",
+        "동대문역사문화공원역",
+        "신당역",
+        "상왕십리역",
+        "왕십리역",
+        "한양대역",
+        "뚝섬역",
+        "성수역",
+        "건대입구역",
+        "구의역",
+        "강변역",
+        "잠실나루역",
+        "잠실역",
+        "종합운동장역",
+        "삼성역",
+        "선릉역",
+        "역삼역",
+        "강남역",
+        "서초역",
+        "방배역",
+        "사당역",
+        "낙성대역",
+        "서울대입구역",
+        "봉천역",
+        "신림역",
+        "신대방역",
+        "구로디지털단지역",
+        "대림역",
+        "신도림역",
+        "문래역",
+      ];
+
+      const intervalDistance = 3170; //역간 거리(고정) M
+
+      /**
+       * 지하철 목록을 출발역과 도착역 select 태그에 추가합니다.
+       */
+      function loadSubways() {
+        var h = [];
+        for (var idx in subwayList) {
+          h.push(`<option value="${idx}">${subwayList[idx]}</option>`);
+        }
+
+        document.getElementById("start").innerHTML = h.join("");
+        document.getElementById("end").innerHTML = h.join("");
+      }
+
+      window.addEventListener("load", function () {
+        loadSubways();
+      });
+
+      //-------------------------------
+      function calculate() {
+        const startSubway = document.getElementById("start");
+        const endSubway = document.getElementById("end");
+
+        const startOptions = startSubway.getElementsByTagName("option");
+        const endOptions = endSubway.getElementsByTagName("option");
+        let startValue;
+        let startIndex;
+        let endValue;
+        let endIndex;
+
+        for (let i = 0; i < subwayList.length; i++) {
+          if (startOptions[i].selected) {
+            startIndex = i;
+            startValue = subwayList[i];
+          }
+
+          if (endOptions[i].selected) {
+            endIndex = i;
+            endValue = subwayList[i];
+          }
+        }
+
+        // calculate length
+        let betweenDistance;
+        let count = endIndex - startIndex;
+        betweenDistance =
+          (parseInt(endIndex) - parseInt(startIndex)) * intervalDistance;
+
+        let pay;
+        // default pay
+        const radios = document.getElementsByName("group");
+        for (let i = 0; i < radios.length; i++) {
+          if (radios[i].checked) {
+            if (radios[i].value == "ADULT") {
+              pay = 1250;
+            } else if (radios[i].value == "YOUNG") {
+              pay = 720;
+            } else if (radios[i].value == "CHILD") {
+              pay = 450;
+            }
+          }
+        }
+
+        // additional pay
+        // 50km 초과
+        if (betweenDistance > 50000) {
+          // 10~50 => 40km
+          pay += 800; // -> 40km 는 5km당 100원
+          pay += Math.ceil((betweenDistance - 50000) / 8000) * 100; // 원
+        } else if (betweenDistance > 10000) {
+          // 10km 초과
+          pay += Math.ceil((betweenDistance - 10000) / 5000) * 100; // 원
+        }
+
+        document.getElementById(
+          "output"
+        ).innerHTML = `<span>출발 역은 ${startValue}, 도착 역은 ${endValue} 입니다.</span> <br/> <span> 총 ${count}개의 역을 승차했고, 총거리는 ${betweenDistance} m 입니다. </span> <br/> <span>총 요금은 \\${pay} 원 입니다.</span>`;
+      }
+    </script>
+  </body>
+</html>
