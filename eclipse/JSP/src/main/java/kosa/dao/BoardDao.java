@@ -3,6 +3,13 @@ package kosa.dao;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.naming.Context;
+import javax.naming.InitialContext;
+import javax.sql.DataSource;
 
 import kosa.model.Board;
 
@@ -16,6 +23,62 @@ public class BoardDao {
 	
 	// JNDI 기술을 이용해서 DBCP 구현
 	// DataSource 객체 (Connection Pool) => JNDI 이름으로 jdbc/oracle이라는 이름으로 사용
+	
+	public Connection getDBCPConnection() {
+		DataSource ds = null;
+		try {
+			Context ctx = new InitialContext();
+			
+			// JNDI
+			ds = (DataSource)ctx.lookup("java:comp/env/jdbc/oracle");
+			
+			return ds.getConnection();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
+	
+	// 글목록 보기
+	public List<Board> listBoard(){
+		Connection conn;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		List<Board> list = new ArrayList<Board>();
+		
+		String sql = "select * from board order by seq desc";
+		
+		try {
+			conn = getDBCPConnection();
+			pstmt = conn.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				Board board = new Board();
+				board.setSeq(rs.getInt("seq"));
+				board.setTitle(rs.getString("title"));
+				board.setWriter(rs.getString("writer"));
+				board.setContents(rs.getString("contents"));
+				board.setRegdate(rs.getString("regdate"));
+				board.setHitcount(rs.getInt("hitcount"));
+				list.add(board);
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			if(pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (Exception e2) {
+					// TODO: handle exception
+				}
+			}
+		}
+		return list;
+	}
+	
 	
 	public int insert(Board board) {
 		Connection conn = null;

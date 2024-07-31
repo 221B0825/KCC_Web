@@ -12,6 +12,7 @@
 	int re = dao.insert(board);
 	
 	if(re == 1){
+		response.sendRedirect("/JSP/board/list.jsp");
 		out.println("성공");
 	}else{
 		out.println("실패");
