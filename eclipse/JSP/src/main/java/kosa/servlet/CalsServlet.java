@@ -9,32 +9,36 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-
+/**
+ * Servlet implementation class CalsServlet
+ */
 @WebServlet("/CalsServlet")
 public class CalsServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+       
     public CalsServlet() {
         super();
+        // TODO Auto-generated constructor stub
     }
-    
+
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// encoding
-		request.setCharacterEncoding("utf-8");
+		request.setCharacterEncoding("UTF-8");
+		
 		int num1 = Integer.parseInt(request.getParameter("num1"));
 		int num2 = Integer.parseInt(request.getParameter("num2"));
 		String name = request.getParameter("name");
-		int result = num1+num2;
 		
+		int result = num1 + num2;
 		
 		request.setAttribute("result", result);
 		request.setAttribute("name", name);
 		
-		// í˜ì´ì§€ ì´ë™
-		// 1. Dispatcher : ê¸°ì¡´ ìš”ì²­ì˜ ì—°ì¥ì„ (1ê°œì˜ request)
-		RequestDispatcher re = request.getRequestDispatcher("/result.jsp");
-		re.forward(request, response);
+		// ÆäÀÌÁö ÀÌµ¿
+		// 1. Dispatcher: ±âÁ¸ ¿äÃ»ÀÇ ¿¬Àå¼±(1°³ÀÇ request)
+		RequestDispatcher rd = request.getRequestDispatcher("/result.jsp");
+		rd.forward(request, response);
 		
-		// 2. Redirect: ê¸°ì¡´ ìš”ì²­ê³¼ ë‹¤ë¥¸ ìƒˆë¡œìš´ ìš”ì²­ìœ¼ë¡œ ì´ë™
+		// 2. Redirect: ±âÁ¸ ¿äÃ»°ú ´Ù¸¥ »õ·Î¿î ¿äÃ»À¸·Î ÀÌµ¿
 //		response.sendRedirect("result.jsp");
 	}
 

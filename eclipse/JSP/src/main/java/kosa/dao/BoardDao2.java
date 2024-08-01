@@ -2,64 +2,132 @@ package kosa.dao;
 
 import java.io.InputStream;
 import java.util.List;
+import java.util.Map;
+
+import org.apache.ibatis.io.Resources;
+import org.apache.ibatis.session.SqlSession;
+import org.apache.ibatis.session.SqlSessionFactory;
+import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 
 import kosa.mapper.BoardMapper;
 import kosa.model.Board;
+import kosa.model.Search;
 
-// using MyBatis
 public class BoardDao2 {
 	private static BoardDao2 dao = new BoardDao2();
 
 	public static BoardDao2 getInstance() {
 		return dao;
 	}
-
-	public SqlSessionFactory getSqlSessionFactory() {
-		// mybatis-config.xml => SqlSessionFactory
+	
+	public SqlSessionFactory getSqlSesstionFactory() {
+		// mybatis-config.xml -> SqlSesstionFactory
 		String resource = "mybatis-config.xml";
 		InputStream in = null;
-
+		
 		try {
-			in = Resource.getResourceAsStream(resource);
-		} catch (Exception e) {
-			// TODO: handle exception
+			in = Resources.getResourceAsStream(resource);
+		} catch(Exception e) {
+			System.out.println(e.getMessage());
 		}
-
+		
 		return new SqlSessionFactoryBuilder().build(in);
 	}
 
-	public List<Board> listBoard() {
-		SqlSession sqlSession = getSqlSessionFactory().openSession();
+//	public List<Board> listBoard(Search search) {
+//		SqlSession sqlSession = getSqlSesstionFactory().openSession();
+//		List<Board> list = null;
+//		
+//		try {
+//			list = sqlSession.getMapper(BoardMapper.class).listBoard(search); // 매퍼를 통해 메소드 호출 (권장)
+//			//list = sqlSession.selectList("kosa.mapper.BoardMapper.listBoard"); // 리스트를 통해 메소드 호출
+//		} catch(Exception e) {
+//			System.out.println(e.getMessage());
+//		} finally {
+//			if (sqlSession != null) {
+//				sqlSession.close();
+//			}
+//		}
+//		
+//		return list;
+//	}
+	
+	public List<Board> listBoard(Map map) {
+		SqlSession sqlSession = getSqlSesstionFactory().openSession();
 		List<Board> list = null;
-
+		
 		try {
-			list = sqlSession.getMapper(BoardMapper.class).listBoard();
-//			list = sqlSession.selectList("kosa.mapper.BoardMapper.listBoard");
-		} catch (Exception e) {
-			e.printStackTrace();
+			list = sqlSession.getMapper(BoardMapper.class).listBoard(map); // 매퍼를 통해 메소드 호출 (권장)
+			//list = sqlSession.selectList("kosa.mapper.BoardMapper.listBoard"); // 리스트를 통해 메소드 호출
+		} catch(Exception e) {
+			System.out.println(e.getMessage());
 		} finally {
 			if (sqlSession != null) {
 				sqlSession.close();
 			}
 		}
-
+		
 		return list;
 	}
-
+	
 	public Board detailBoard(int seq) {
-		SqlSession sqlSession = getSqlSessionFactory().openSession();
+		SqlSession sqlSession = getSqlSesstionFactory().openSession();
 		Board board = null;
-
+		
 		try {
 			board = sqlSession.getMapper(BoardMapper.class).detailBoard(seq);
-		} catch (Exception e) {
-			e.printStackTrace();
+		} catch(Exception e) {
+			System.out.println(e.getMessage());
 		} finally {
 			if (sqlSession != null) {
 				sqlSession.close();
 			}
 		}
-
+		
 		return board;
+	}
+	
+	public int insertBoard(Board board) {
+		SqlSession sqlSession = getSqlSesstionFactory().openSession();
+		int re = -1;
+		
+		try {
+			re = sqlSession.getMapper(BoardMapper.class).insertBoard(board);
+			if (re > 0) {
+				sqlSession.commit();
+			} else {
+				sqlSession.rollback();
+			}
+		} catch(Exception e) {
+			System.out.println(e.getMessage());
+		} finally {
+			if (sqlSession != null) {
+				sqlSession.close();
+			}
+		}
+		
+		return re;
+	}
+	
+	public int updateBoard(Board board) {
+		SqlSession sqlSession = getSqlSesstionFactory().openSession();
+		int re = -1;
+		
+		try {
+			re = sqlSession.getMapper(BoardMapper.class).updateBoard(board);
+			if (re > 0) {
+				sqlSession.commit();
+			} else {
+				sqlSession.rollback();
+			}
+		} catch(Exception e) {
+			System.out.println(e.getMessage());
+		} finally {
+			if (sqlSession != null) {
+				sqlSession.close();
+			}
+		}
+		
+		return re;
 	}
 }

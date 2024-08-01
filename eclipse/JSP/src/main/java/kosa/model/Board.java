@@ -3,11 +3,7 @@ package kosa.model;
 import java.io.Serializable;
 
 public class Board implements Serializable {
-	
-
-
 	private int seq;
-	
 	private String title;
 	private String writer;
 	private String contents;
@@ -15,7 +11,6 @@ public class Board implements Serializable {
 	private int hitcount;
 	
 	public Board() {};
-	
 	public Board(int seq, String title, String writer, String contents, String regdate, int hitcount) {
 		super();
 		this.seq = seq;
@@ -80,6 +75,4 @@ public class Board implements Serializable {
 				+ regdate + ", hitcount=" + hitcount + "]";
 	}
 	
-	
-
 }
