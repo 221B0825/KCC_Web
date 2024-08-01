@@ -23,17 +23,6 @@
 		order by seq desc
 	</select>
 	
-	<resultMap type="Board" id="boardMap">
-		<id property="seq" column="seq"/>
-		<result property="title_1" column="title"/>
-		<result property="writer_1" column="writer"/>
-		<result property="contents" column="contents"/>
-		<result property="regdate" column="regdate"/>
-		<result property="hitcount" column="hitcount"/>
-	</resultMap>
-	
-	<select id="listBoard" parameterType="java.util.Map" resultType="boardMap">
-	</select>
 
 
 	<select id="listBoard" parameterType="java.util.Map" resultType="Board">
