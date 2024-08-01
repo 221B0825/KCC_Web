@@ -1,6 +1,8 @@
 package kosa.model;
 
-public class Board {
+import java.io.Serializable;
+
+public class Board implements Serializable {
 	
 
 

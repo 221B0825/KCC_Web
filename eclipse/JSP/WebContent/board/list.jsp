@@ -1,3 +1,4 @@
+<%@page import="kosa.dao.BoardDao2"%>
 <%@page import="kosa.model.Board"%>
 <%@page import="java.util.List"%>
 <%@page import="kosa.dao.BoardDao"%>
@@ -5,7 +6,8 @@
 
 
 <%
-	BoardDao dao = BoardDao.getInstance();
+	//BoardDao dao = BoardDao.getInstance();
+	BoardDao2 dao = BoardDao2.getInstance();
 	List<Board> list = dao.listBoard();
 	out.println(list.toString());
 	out.println(list.get(1).getContents());
